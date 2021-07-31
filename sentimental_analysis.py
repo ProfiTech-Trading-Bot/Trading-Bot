@@ -40,7 +40,6 @@ for tweet in tweets:
     if final_text.startswith('@'):
         position = final_text.index(' ')
         final_text = final_text[position + 1 :]
-    print(final_text)
 
     #analyze sentiment of tweet
     analysis = TextBlob(final_text)
