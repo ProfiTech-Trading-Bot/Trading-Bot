@@ -7,6 +7,32 @@ import tweepy
 from textblob import TextBlob
 import datetime
 
+def cleanTweet(tweet):
+    final_text = tweet.text.replace('RT', '')
+    #remove starting username tag
+    if final_text.startswith(' @'):
+        position = final_text.index(':')
+        final_text = final_text[position + 2 :]
+    #remove remaining username tags
+    if final_text.startswith('@'):
+        position = final_text.index(' ')
+        final_text = final_text[position + 1 :]
+    return final_text
+
+def stockSentiment(tweets):
+    polarity = 0
+
+    # Processing
+    for tweet in tweets:
+        final_text = cleanTweet(tweet)
+        
+        #analyze sentiment of tweet
+        analysis = TextBlob(final_text)
+        tweet_polarity = analysis.polarity
+        polarity += tweet_polarity
+
+    return polarity
+
 mykeys = open('twitterkeys.txt').read().splitlines()
 
 api_key = mykeys[0]
@@ -29,42 +55,13 @@ end_date = datetime.datetime.now().date()
 
 tweets = tweepy.Cursor(api.search, q=search_term, lang='en', since=start_date, until=end_date).items(tweet_amount)
 
-polarity = 0
+polarity = stockSentiment(tweets)
 positive_tweets = 0
 neutral_tweets = 0
 negative_tweets = 0
 
-#clean tweet
-for tweet in tweets:
-    final_text = tweet.text.replace('RT', '')
-    
-    #remove starting username tag
-    if final_text.startswith(' @'):
-        position = final_text.index(':')
-        final_text = final_text[position + 2 :]
-    #remove remaining username tags
-    if final_text.startswith('@'):
-        position = final_text.index(' ')
-        final_text = final_text[position + 1 :]
-
-    #analyze sentiment of tweet
-    analysis = TextBlob(final_text)
-    tweet_polarity = analysis.polarity
-    polarity += tweet_polarity
-
-    #determine if tweet was positive, neutral, or negative, and count it 
-    if tweet_polarity > 0:
-        positive_tweets += 1
-    elif tweet_polarity < 0:
-        negative_tweets += 1
-    else:
-        neutral_tweets += 1
-
-    print((tweet.created_at).date())
-    print(final_text)
-
 #output sentiment analysis
 print(f"The polarity of {search_term} is: {polarity}")
-print(f"Number of positive tweets: {positive_tweets}")
-print(f"Number of negative tweets: {negative_tweets}")
-print(f"Number of neutral tweets: {neutral_tweets}")
+#print(f"Number of positive tweets: {positive_tweets}")
+#print(f"Number of negative tweets: {negative_tweets}")
+#print(f"Number of neutral tweets: {neutral_tweets}")
