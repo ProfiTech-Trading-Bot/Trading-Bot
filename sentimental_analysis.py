@@ -5,6 +5,7 @@
 
 import tweepy
 from textblob import TextBlob
+import datetime
 
 mykeys = open('twitterkeys.txt').read().splitlines()
 
@@ -22,7 +23,11 @@ api = tweepy.API(auth_handler)
 search_term = input('Enter a stock ticker (ex. GME): ')
 tweet_amount = 200 #only look at 200 tweets
 
-tweets = tweepy.Cursor(api.search, q=search_term, lang='en').items(tweet_amount)
+# Filter through the tweets between the two dates (not including time).
+start_date = datetime.datetime(2021, 7, 30).date()
+end_date = datetime.datetime.now().date()
+
+tweets = tweepy.Cursor(api.search, q=search_term, lang='en', since=start_date, until=end_date).items(tweet_amount)
 
 polarity = 0
 positive_tweets = 0
@@ -32,6 +37,7 @@ negative_tweets = 0
 #clean tweet
 for tweet in tweets:
     final_text = tweet.text.replace('RT', '')
+    
     #remove starting username tag
     if final_text.startswith(' @'):
         position = final_text.index(':')
@@ -53,6 +59,9 @@ for tweet in tweets:
         negative_tweets += 1
     else:
         neutral_tweets += 1
+
+    print((tweet.created_at).date())
+    print(final_text)
 
 #output sentiment analysis
 print(f"The polarity of {search_term} is: {polarity}")
