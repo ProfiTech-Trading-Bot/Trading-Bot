@@ -77,7 +77,7 @@ def searchStocks(query):
     stocks = pd.read_csv("stocks_list.csv")
     stocks = stocks['Ticker'].tolist()
 
-    return query in stocks
+    return query.upper() in stocks
 
 
 balance = 10000 #starting account balance of $10,000
