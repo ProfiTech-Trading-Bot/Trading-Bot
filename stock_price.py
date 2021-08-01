@@ -36,5 +36,3 @@ def getTrend(ticker):
         
 
     return isUpTrend
-
-print(getTrend('AMZN'))
