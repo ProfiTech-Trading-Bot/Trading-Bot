@@ -10,6 +10,7 @@ def getStockPrice(ticker):
     recentClose = data.iloc[0, 3] #newest value in the 0th row from the 'close' column
     return recentClose
 
+#edge case: if buying more stocks that the user already owns, we need to make an average cost.
 def buyStock(ticker, quantity, portfolio):
     global balance
     price = getStockPrice(ticker)
@@ -17,11 +18,11 @@ def buyStock(ticker, quantity, portfolio):
     #if the user has enough funds for the trade, buy the stock
     if balance - quantity * price >= 0:
         #log the trade and update user's balance
-        trade = pd.DataFrame({'ticker': [ticker],
-                                'quantity': [quantity],
-                                'purchasePrice': [price],
-                                'date': [date]})
-        portfolio = portfolio.append(trade)
+        portfolio[ticker] = {
+                'quantity': quantity,
+                'purchasePrice': price,
+                'date': date
+                }
         balance = balance - quantity * getStockPrice(ticker)
 
     return portfolio
@@ -32,10 +33,9 @@ def sellStock(ticker, quantity, balance):
     return balance
 
 balance = 10000 #starting account balance of $10,000
-portfolio = pd.DataFrame(columns=['ticker', 'quantity', 'purchasePrice', 'date'])
-#portfolio2 = {}
 
+portfolio = {}
 portfolio = buyStock('AMD', 10, portfolio)
 
 print(balance)
-print(portfolio.head())
+print(portfolio)
