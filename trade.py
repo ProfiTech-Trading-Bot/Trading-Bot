@@ -27,15 +27,28 @@ def buyStock(ticker, quantity, portfolio):
 
     return portfolio
 
-def sellStock(ticker, quantity, balance):
+#note: should the date also be updated in the portfolio?
+def sellStock(ticker, quantity, portfolio):
+    global balance
+    price = getStockPrice(ticker)
     #if the user has enough shares for the trade, sell the stock
-    #log the trade
-    return balance
+    if portfolio[ticker]['quantity'] - quantity >= 0:
+        portfolio[ticker]['quantity'] -= quantity
+        balance += quantity * price
+    
+    #if all shares were sold, delete it from the dictionary
+    if portfolio[ticker]['quantity'] == 0:
+        del portfolio[ticker]
+
+    return portfolio
 
 balance = 10000 #starting account balance of $10,000
 
 portfolio = {}
 portfolio = buyStock('AMD', 10, portfolio)
 
+print(balance)
+
+portfolio = sellStock('AMD', 10, portfolio)
 print(balance)
 print(portfolio)
