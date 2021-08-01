@@ -1,5 +1,5 @@
-from flask import Flask, render_template, url_for, flash, redirect
-from forms import RegistrationForm, LoginForm
+from flask import Flask, flash, redirect, render_template, request, url_for
+from forms import RegistrationForm, LoginForm, SearchTicker
 import os
 app = Flask(__name__)
 
@@ -11,9 +11,9 @@ app.config['UPLOAD_FOLDER'] = picFolder
 posts = [
      {
           'author': 'Kitty Cai, Richard Yang, Hugh Jiang, Fahim Ahmed',
-          'title': 'Blog Post 1',
-          'content': 'First post content',
-          'date_posted': 'April 20, 2018'
+          'title': 'How it Works',
+          'content': 'Welcome to the Front-end of our hackathon project!',
+          'date_posted': 'August 1, 2021'
      },
      {
           'author': 'Jane Doe',
@@ -44,9 +44,15 @@ def register():
           return redirect (url_for('home'))
      return render_template('register.html', title = "Sign Up", form = form)
 
-@app.route("/login")
+@app.route("/login", methods = ['GET', 'POST'])
 def login():
      form = LoginForm()
+     if form.validate_on_submit():
+          if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+               flash('You have been logged in!', 'success')
+               return redirect(url_for('home'))
+          else:
+               flash('Login Unsuccessful. Please check username and password', 'danger')
      return render_template('login.html', title = "Sign In", form = form)
 
 if __name__ == '__main__':

@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, SelectField
 from wtforms.validators import DataRequired, Length, Email, EqualTo
 
 class RegistrationForm(FlaskForm):
@@ -20,3 +20,8 @@ class LoginForm(FlaskForm):
 
      remember = BooleanField('Remember Me')
      submit = SubmitField('Login')
+
+class SearchTicker(FlaskForm):
+     stock_choice = ['TSLA', 'AAPL']
+     select = SelectField('Search for stocks:', stock_choice = stock_choice)
+     search = StringField('')
