@@ -2,8 +2,10 @@
 #July 31st, 2021 - August 2nd, 2021
 #ProfiTech Hackathon
 
+from stock_price import getTrend
+from sentimental_analysis import TweetAnalyzer
 from flask import Flask, flash, redirect, render_template, request, url_for
-from forms import RegistrationForm, LoginForm, SearchTicker
+from forms import RegistrationForm, LoginForm, SearchTickerForm
 import os
 from trade import searchStocks
 
@@ -13,6 +15,9 @@ picFolder = os.path.join('static', 'Pictures')
 
 app.config['SECRET_KEY'] = '035f8bff65ee4a394c36a0e11d01661f'
 app.config['UPLOAD_FOLDER'] = picFolder
+
+# Create TweetAnalyzer object for use in trading()
+tweetAnalyzer = TweetAnalyzer()
 
 posts = [
      {
@@ -33,9 +38,9 @@ posts = [
 @app.route("/")
 @app.route("/home")
 def home():
-     search = SearchTicker(request.form)
+     search = SearchTickerForm(request.form)
      if request.method == 'POST':
-          return searchresults(search)
+          return search(search)
      StockMarket = os.path.join(app.config['UPLOAD_FOLDER'], 'StockMarketBW.jpg')
      #return render_template('home.html', main_image = StockMarket)
      return render_template('home.html', posts=posts, main_image = StockMarket, form = search)
@@ -64,8 +69,26 @@ def login():
                flash('Login Unsuccessful. Please check username and password', 'danger')
      return render_template('login.html', title = "Sign In", form = form)
 
-@app.route('/searchresults')
-def searchresults(search):
+@app.route('/live-signals', methods=['GET', 'POST'])
+def live_signals():
+     form = SearchTickerForm()
+
+     # Trade data that is passed to html template
+     trade_data = {}
+
+     # Check if the search input ticker is a valid ticker
+     print(form.ticker)
+     print(type(form.ticker.data))
+     print(str(form.ticker.data))
+     
+     input = form.ticker.data
+     
+     # Check if an input was entered
+     if input != None and searchStocks(input) == False:
+          flash(f'{input.upper()} is not a valid ticker symbol in the S&P500. Please try again.')
+
+     return render_template('trade.html', form=form, trade_data=trade_data)
+
      results = []
      search_string = search.data['search']
 
