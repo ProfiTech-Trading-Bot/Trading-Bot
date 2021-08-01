@@ -1,4 +1,6 @@
 import pandas as pd
+import matplotlib
+import matplotlib.pyplot as plt
 import datetime
 from alpha_vantage.timeseries import TimeSeries
 from api import ALPHA_VANTAGE_API_TOKEN
@@ -36,11 +38,18 @@ def buyStock(ticker, quantity, portfolio):
 #note: should the date also be updated in the portfolio?
 def sellStock(ticker, quantity, portfolio):
     global balance
+    global profitLog
     price = getStockPrice(ticker)
+    date = datetime.datetime.now()
     #if the user has enough shares for the trade, sell the stock
     if portfolio[ticker]['quantity'] - quantity >= 0:
         portfolio[ticker]['quantity'] -= quantity
         balance += quantity * price
+        
+        #calculate profit from sale
+        profit = quantity * price - quantity * portfolio[ticker]['purchasePrice']
+        profitLogUpdate = pd.DataFrame({'profit': [profit], 'date': [date]})
+        profitLog = profitLog.append(profitLogUpdate)
     
     #if all shares were sold, delete it from the dictionary
     if portfolio[ticker]['quantity'] == 0:
@@ -48,13 +57,21 @@ def sellStock(ticker, quantity, portfolio):
 
     return portfolio
 
+def graphProfit():
+    profitLog.plot(x = 'date', y = 'profit', kind = 'line')
+    plt.title("Trading Bot Profit Overtime")
+    plt.ylabel("Profit ($)")
+    plt.xlabel("Date")
+    plt.savefig('profit.png')
+
 balance = 10000 #starting account balance of $10,000
+profitLog = pd.DataFrame(columns = ['profit', 'date'])
+initial = pd.DataFrame({'profit': [0], 'date': [datetime.datetime.now()]})
+profitLog = profitLog.append(initial)
+
 portfolio = {}
 
 portfolio = buyStock('AMD', 10, portfolio)
-print(balance)
-print(portfolio)
-
 portfolio = sellStock('AMD', 10, portfolio)
-print(balance)
-print(portfolio)
+
+graphProfit()
