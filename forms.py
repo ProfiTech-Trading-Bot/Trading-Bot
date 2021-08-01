@@ -22,6 +22,6 @@ class LoginForm(FlaskForm):
      submit = SubmitField('Login')
 
 class SearchTicker(FlaskForm):
-     stock_choice = ['TSLA', 'AAPL']
-     select = SelectField('Search for stocks:', stock_choice = stock_choice)
+     choices = ['TSLA', 'AAPL']
+     select = SelectField('Search for stocks:', choices = choices)
      search = StringField('')

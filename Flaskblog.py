@@ -31,7 +31,7 @@ posts = [
 def home():
      search = SearchTicker(request.form)
      if request.method == 'POST':
-          return search_results(search)
+          return searchresults(search)
      StockMarket = os.path.join(app.config['UPLOAD_FOLDER'], 'StockMarketBW.jpg')
      #return render_template('home.html', main_image = StockMarket)
      return render_template('home.html', posts=posts, main_image = StockMarket, form = search)
@@ -73,5 +73,6 @@ def searchresults(search):
      else:
           #Return results
           return render_template('results.html', results = results)
+   
 if __name__ == '__main__':
      app.run(debug=True)

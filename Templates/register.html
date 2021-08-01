@@ -1,5 +1,3 @@
-
-
 {% extends "layout.html" %}
 {% block content %}
      <div class = "content-section">
@@ -12,56 +10,56 @@
                          {{ form.username.label(class = "form-control-label") }}
                          <br>
                          {% if form.username.errors %}
-                              {{ form.username(class = "form-control-label form-control-lg is-invalid") }}
+                              {{ form.username(class = "form-control form-control-lg is-invalid") }}
                               <div class = "invalid-feedback">
                                    {% for error in form.username.errors %}
                                         <span>{{ error }}</span>
                                    {% endfor %}
                               </div>
-                         {%else %}
-                              {{ form.username(class = "form-control-label form-control-lg") }}
+                         {% else %}
+                              {{ form.username(class = "form-control form-control-lg") }}
                          {% endif %}
                     </div>
                     <div class = "form-group">
                          {{ form.email.label(class = "form-control-label") }}
                          <br>
                          {% if form.email.errors %}
-                              {{ form.email(class = "form-control-label form-control-lg is-invalid") }}
+                              {{ form.email(class = "form-control form-control-lg is-invalid") }}
                               <div class = "invalid-feedback">
                                    {% for error in form.email.errors %}
                                         <span>{{ error }}</span>
                                    {% endfor %}
                               </div>
                          {%else %}
-                              {{ form.email(class = "form-control-label form-control-lg") }}
+                              {{ form.email(class = "form-control form-control-lg") }}
                          {% endif %}
                     </div>
                     <div class = "form-group">
                          {{ form.password.label(class = "form-control-label") }}
                          <br>
                          {% if form.password.errors %}
-                              {{ form.password(class = "form-control-label form-control-lg is-invalid") }}
+                              {{ form.password(class = "form-control form-control-lg is-invalid") }}
                               <div class = "invalid-feedback">
                                    {% for error in form.password.errors %}
                                         <span>{{ error }}</span>
                                    {% endfor %}
                               </div>
                          {%else %}
-                              {{ form.password(class = "form-control-label form-control-lg") }}
+                              {{ form.password(class = "form-control form-control-lg") }}
                          {% endif %}
                     </div>
                     <div class = "form-group">
                          {{ form.confirmpassword.label(class = "form-control-label") }}
                          <br>
                          {% if form.confirmpassword.errors %}
-                              {{ form.confirmpassword(class = "form-control-label form-control-lg is-invalid") }}
+                              {{ form.confirmpassword(class = "form-control form-control-lg is-invalid") }}
                               <div class = "invalid-feedback">
                                    {% for error in form.confirmpassword.errors %}
                                         <span>{{ error }}</span>
                                    {% endfor %}
                               </div>
                          {%else %}
-                              {{ form.confirmpassword(class = "form-control-label form-control-lg") }}
+                              {{ form.confirmpassword(class = "form-control form-control-lg") }}
                          {% endif %}
                     </div>
                </fieldset>
