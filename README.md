@@ -1,8 +1,6 @@
-#Trading-Bot
-'''
-Before you begin running the program, please make sure to install the following:
-     pip install alpha_vantage
-     pip install numpy
-     pip install pandas
-     pip install pygame
-'''
+# Trading-Bot
+
+
+Before you begin running the program, please make sure to:
+* Run pip install requirements.txt in the terminal.
+* Create a twitterkeys.txt file in the main directory, containing your api key in line 1, api key secret in line 2, access token in line 3, and access token secret in line 4.
