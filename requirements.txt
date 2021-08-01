@@ -1,8 +1,10 @@
-tweepy
-textblob
 alpha_vantage
-pandas
-numpy
-requests
+email_validator
 Flask
+flask-wtf
 matplotlib
+numpy
+pandas
+requests
+textblob
+tweepy
