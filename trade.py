@@ -10,13 +10,19 @@ def getStockPrice(ticker):
     recentClose = data.iloc[0, 3] #newest value in the 0th row from the 'close' column
     return recentClose
 
-#edge case: if buying more stocks that the user already owns, we need to make an average cost.
 def buyStock(ticker, quantity, portfolio):
     global balance
     price = getStockPrice(ticker)
     date = datetime.datetime.now()
+
     #if the user has enough funds for the trade, buy the stock
     if balance - quantity * price >= 0:
+        #if the user already owns shares, calculate the average cost basis.
+        if ticker in portfolio:
+            initialQuantity = portfolio[ticker]['quantity']
+            initialPrice = portfolio[ticker]['purchasePrice']
+            price = (initialQuantity * initialPrice + quantity * price) / (initialQuantity + quantity) #cost basis price (total investment / total quantity)
+
         #log the trade and update user's balance
         portfolio[ticker] = {
                 'quantity': quantity,
@@ -24,7 +30,7 @@ def buyStock(ticker, quantity, portfolio):
                 'date': date
                 }
         balance = balance - quantity * getStockPrice(ticker)
-
+    
     return portfolio
 
 #note: should the date also be updated in the portfolio?
@@ -43,11 +49,11 @@ def sellStock(ticker, quantity, portfolio):
     return portfolio
 
 balance = 10000 #starting account balance of $10,000
-
 portfolio = {}
-portfolio = buyStock('AMD', 10, portfolio)
 
+portfolio = buyStock('AMD', 10, portfolio)
 print(balance)
+print(portfolio)
 
 portfolio = sellStock('AMD', 10, portfolio)
 print(balance)
