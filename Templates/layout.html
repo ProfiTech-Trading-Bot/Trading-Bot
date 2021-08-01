@@ -1,3 +1,6 @@
+<!--Fahim Ahmed, Hugh Jiang, Richard Yang, Zhi Rong Cai
+July 31st, 2021 - August 2nd, 2021
+ProfiTech Hackathon-->
 <!-- Referenced https://getbootstrap.com/docs/4.0/getting-started/introduction/#starter-template -->
 
 <!DOCTYPE html>
@@ -17,6 +20,7 @@
      <!-- Logo in browser -->
      <link rel = "shortcut icon" type = "image/x-icon" href = "{{ url_for('static', filename = 'IconLogo.ico')}}" />
 
+     <!-- Changes the heading depending on the situation -->
      {% if title %}
           <title>Profiters - {{ title }}</title>
      {% else %}

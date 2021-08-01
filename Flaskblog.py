@@ -1,3 +1,7 @@
+#Fahim Ahmed, Hugh Jiang, Richard Yang, Zhi Rong Cai
+#July 31st, 2021 - August 2nd, 2021
+#ProfiTech Hackathon
+
 from flask import Flask, flash, redirect, render_template, request, url_for
 from forms import RegistrationForm, LoginForm, SearchTicker
 import os
