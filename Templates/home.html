@@ -5,22 +5,25 @@ ProfiTech Hackathon-->
 {% extends "layout.html" %}
 {% block content %}
      <h1> Getting Trading Signals Based on Twitter Sentiment and Trends Analysis </h1>
+     <hr style="height:1px;border-width:0;color:rgb(0, 0, 0);background-color:rgb(0, 0, 0)">
 
      <center><img style = "margin: 20px 0px 30px 0px;" src = "{{main_image}}" alt = "Stock Market" width = "100%" height = "max"></center>
 
      {% for post in posts %}
-               <article class="media content-section">
-                    <div class="media-body">
-                         <div class="article-metadata">
-                              <a class="mr-2">{{ post.author }}</a>
-                              <!--<a class="mr-2" href="#">{{ post.author }}</a>-->
-                              <small class="text-muted">{{ post.date_posted }}</small>
-                         </div>
-                         <h2><a class="article-title" href = "{{ url_for('about') }}">{{ post.title }}</a></h2>
-                         <p class="article-content">{{ post.content }}</p>
+          <article class="media content-section">
+               <div class="media-body">
+                    <div class="article-metadata">
+                         <a class="mr-2">{{ post.author }}</a>
+                         <!--<a class="mr-2" href="#">{{ post.author }}</a>-->
+                         <small class="text-muted">{{ post.date_posted }}</small>
                     </div>
-               </article>
+                    <h2><a class="article-title" href = "{{ url_for('about') }}">{{ post.title }}</a></h2>
+                    <p class="article-content">{{ post.content }}</p>
+               </div>
+          </article>
      {% endfor %}
+
+     
 {% endblock content %}
 
 <form method="GET">

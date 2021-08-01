@@ -22,11 +22,11 @@ posts = [
           'date_posted': 'August 1, 2021'
      },
      {
-          'author': 'Jane Doe',
-          'title': 'Blog Post 2',
-          'content': 'Second post content',
-          'date_posted': 'April 21, 2018'
-     },
+          'author': 'Kitty Cai, Richard Yang, Hugh Jiang, Fahim Ahmed',
+          'title': 'Meet the Profiters',
+          'content': 'Take a glimpse of the Profiters who created the program!',
+          'date_posted': 'August 1, 2021'
+     }
 ]
 
 
@@ -38,12 +38,16 @@ def home():
           return searchresults(search)
      StockMarket = os.path.join(app.config['UPLOAD_FOLDER'], 'StockMarketBW.jpg')
      #return render_template('home.html', main_image = StockMarket)
-     return render_template('home.html', posts=posts, main_image = StockMarket, form = search)
+     return render_template('home.html', posts = posts, main_image = StockMarket, form = search)
      #return render_template('home.html')
 
 @app.route("/about")
 def about():
-     return render_template('about.html', title = 'About')
+     return render_template('about.html', title = 'How it Works')
+
+@app.route("/meet")
+def meet():
+     return render_template('meet.html', title = 'Meet the Profiters')
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():
