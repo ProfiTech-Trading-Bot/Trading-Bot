@@ -60,8 +60,8 @@ def login():
                flash('Login Unsuccessful. Please check username and password', 'danger')
      return render_template('login.html', title = "Sign In", form = form)
 
-@app.route('/results')
-def search_results(search):
+@app.route('/searchresults')
+def searchresults(search):
      results = []
      search_string = search.data['search']
 
