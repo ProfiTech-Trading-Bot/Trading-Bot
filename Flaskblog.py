@@ -73,8 +73,8 @@ def login():
                flash('Login Unsuccessful. Please check username and password', 'danger')
      return render_template('login.html', title = "Sign In", form = form)
 
-@app.route('/live-signals', methods=['GET', 'POST'])
-def live_signals():
+@app.route('/livesignals', methods=['GET', 'POST'])
+def livesignals():
      form = SearchTickerForm()
 
      # Trade data that is passed to html template
@@ -91,7 +91,7 @@ def live_signals():
      if input != None and searchStocks(input) == False:
           flash(f'{input.upper()} is not a valid ticker symbol in the S&P500. Please try again.')
 
-     return render_template('trade.html', form=form, trade_data=trade_data)
+     return render_template('livesignals.html', form=form, trade_data=trade_data)
 
      results = []
      search_string = search.data['search']
