@@ -84,6 +84,6 @@ class TweetAnalyzer:
 
         return avg_polarity
 
-test = TweetAnalyzer()
-print(test.getStockSentiment('GME', datetime.datetime(2021, 7, 31)))
+#test = TweetAnalyzer()
+#print(test.getStockSentiment('GME', datetime.datetime(2021, 7, 31)))
 
