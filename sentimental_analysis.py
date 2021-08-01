@@ -21,6 +21,7 @@ def cleanTweet(tweet):
 
 def stockSentiment(tweets):
     polarity = 0
+    total = 0
 
     #Processing
     for tweet in tweets:
@@ -29,9 +30,16 @@ def stockSentiment(tweets):
         #Analyze sentiment of tweet
         analysis = TextBlob(final_text)
         tweet_polarity = analysis.polarity
-        polarity += tweet_polarity
 
-    return polarity
+        # For each tweet, -1.0 <= tweet_polarity <= 1.0. The more negative the polarity, the more negative the sentiment.
+        # The more positive the polarity, the more positive the sentiment
+        polarity += tweet_polarity
+        total += 1
+
+    # -1.0 <= avg_polarity <= 1.0, larger magnitudes mean a greater positive or negative sentiment
+    avg_polarity = polarity/total
+
+    return avg_polarity
 
 mykeys = open('twitterkeys.txt').read().splitlines()
 
@@ -56,12 +64,10 @@ end_date = datetime.datetime.now().date()
 tweets = tweepy.Cursor(api.search, q=search_term, lang='en', since=start_date, until=end_date).items(tweet_amount)
 
 polarity = stockSentiment(tweets)
-positive_tweets = 0
-neutral_tweets = 0
-negative_tweets = 0
 
 #Output sentiment analysis
-print(f"The polarity of {search_term} is: {polarity}")
+print(f"The average polarity of {search_term} is: {polarity}")
 #print(f"Number of positive tweets: {positive_tweets}")
 #print(f"Number of negative tweets: {negative_tweets}")
 #print(f"Number of neutral tweets: {neutral_tweets}")
+
