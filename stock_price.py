@@ -1,5 +1,5 @@
 #Fahim Ahmed, Hugh Jiang, Richard Yang, Zhi Rong Cai
-#July 31st, 2021 - August 2nd, 2021
+#July 31st, 2021 - August 2nd, 2021 
 
 #Set up the environment
 from alpha_vantage.timeseries import TimeSeries
