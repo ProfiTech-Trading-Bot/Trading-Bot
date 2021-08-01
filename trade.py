@@ -57,12 +57,20 @@ def sellStock(ticker, quantity, portfolio):
 
     return portfolio
 
+#Graphs a chart of the trading bot's profit
 def graphProfit():
     profitLog.plot(x = 'date', y = 'profit', kind = 'line')
     plt.title("Trading Bot Profit Overtime")
     plt.ylabel("Profit ($)")
     plt.xlabel("Date")
     plt.savefig('profit.png')
+
+#Checks if a stock the user entered is one of the top 500 stocks.
+def checkStock(ticker):
+    stocks = pd.read_csv("stocks_list.csv")
+    stocks = stocks['Ticker'].tolist()
+
+    return ticker in stocks
 
 balance = 10000 #starting account balance of $10,000
 profitLog = pd.DataFrame(columns = ['profit', 'date'])
@@ -71,7 +79,9 @@ profitLog = profitLog.append(initial)
 
 portfolio = {}
 
-portfolio = buyStock('AMD', 10, portfolio)
-portfolio = sellStock('AMD', 10, portfolio)
+#portfolio = buyStock('AMD', 10, portfolio)
+#portfolio = sellStock('AMD', 10, portfolio)
 
-graphProfit()
+#graphProfit()
+
+#print(checkStock("AAPL"))
