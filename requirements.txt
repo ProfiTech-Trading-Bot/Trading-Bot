@@ -1,2 +1,7 @@
 tweepy
 textblob
+alpha_vantage
+pandas
+numpy
+requests
+Flask
