@@ -1,6 +1,8 @@
 from flask import Flask, flash, redirect, render_template, request, url_for
 from forms import RegistrationForm, LoginForm, SearchTicker
 import os
+from trade import searchStocks
+
 app = Flask(__name__)
 
 picFolder = os.path.join('static', 'Pictures')
@@ -27,9 +29,12 @@ posts = [
 @app.route("/")
 @app.route("/home")
 def home():
+     search = SearchTicker(request.form)
+     if request.method == 'POST':
+          return search_results(search)
      StockMarket = os.path.join(app.config['UPLOAD_FOLDER'], 'StockMarketBW.jpg')
      #return render_template('home.html', main_image = StockMarket)
-     return render_template('home.html', posts=posts, main_image = StockMarket)
+     return render_template('home.html', posts=posts, main_image = StockMarket, form = search)
      #return render_template('home.html')
 
 @app.route("/about")
@@ -55,5 +60,18 @@ def login():
                flash('Login Unsuccessful. Please check username and password', 'danger')
      return render_template('login.html', title = "Sign In", form = form)
 
+@app.route('/results')
+def search_results(search):
+     results = []
+     search_string = search.data['search']
+
+     results = searchStocks(search_string)
+
+     if not results:
+          flash('No results found!')
+          return redirect('/')
+     else:
+          #Return results
+          return render_template('results.html', results = results)
 if __name__ == '__main__':
      app.run(debug=True)

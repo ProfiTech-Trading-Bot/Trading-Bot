@@ -66,11 +66,19 @@ def graphProfit():
     plt.savefig('profit.png')
 
 #Checks if a stock the user entered is one of the top 500 stocks.
-def checkStock(ticker):
+def searchStocks(query):
     stocks = pd.read_csv("stocks_list.csv")
     stocks = stocks['Ticker'].tolist()
 
-    return ticker in stocks
+    results = []
+
+    for ticker in stocks:
+        if query in ticker:
+            results.append(query)
+
+    return results
+
+
 
 balance = 10000 #starting account balance of $10,000
 profitLog = pd.DataFrame(columns = ['profit', 'date'])
