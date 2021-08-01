@@ -25,7 +25,6 @@ class LoginForm(FlaskForm):
      remember = BooleanField('Remember Me')
      submit = SubmitField('Login')
 
-class SearchTicker(FlaskForm):
-     choices = ['TSLA', 'AAPL']
-     select = SelectField('Search for stocks:', choices = choices)
-     search = StringField('')
+class SearchTickerForm(FlaskForm):
+     ticker = StringField('Enter a Stock Ticker', validators=[DataRequired()])
+     submit = SubmitField('Enter')
