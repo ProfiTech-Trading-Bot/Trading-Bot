@@ -88,8 +88,14 @@ def livesignals():
      input = form.ticker.data
      
      # Check if an input was entered
-     if input != None and searchStocks(input) == False:
-          flash(f'{input.upper()} is not a valid ticker symbol in the S&P500. Please try again.')
+     if input != None: 
+          input = input.upper()
+
+          if searchStocks(input) == False:
+               flash(f'{input} is not a valid ticker symbol in the S&P500. Please try again.')
+          else:
+               print(getTrend(input))
+               print(tweetAnalyzer.getStockSentiment(input))
 
      return render_template('livesignals.html', form=form, trade_data=trade_data)
 
