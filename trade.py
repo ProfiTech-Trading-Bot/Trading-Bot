@@ -4,6 +4,9 @@ import matplotlib.pyplot as plt
 import datetime
 from alpha_vantage.timeseries import TimeSeries
 from api import ALPHA_VANTAGE_API_TOKEN
+from sentimental_analysis import TweetAnalyzer
+from stock_price import getTrend
+
 
 def getStockPrice(ticker):
     #Create TimeSeries object and make API call
@@ -70,14 +73,7 @@ def searchStocks(query):
     stocks = pd.read_csv("stocks_list.csv")
     stocks = stocks['Ticker'].tolist()
 
-    results = []
-
-    for ticker in stocks:
-        if query in ticker:
-            results.append(query)
-
-    return results
-
+    return query in stocks
 
 
 balance = 10000 #starting account balance of $10,000

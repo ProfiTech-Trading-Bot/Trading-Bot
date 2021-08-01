@@ -18,24 +18,7 @@
                </article>
      {% endfor %}
      
-     {% with messages = get_flashed_messages() %}
-  {% if messages %}
-    <ul class=flashes>
-    {% for message in messages %}
-      <li>{{ message }}</li>
-    {% endfor %}
-    </ul>
-  {% endif %}
-{% endwith %}
-
-{% from "_formhelpers.html" import render_field %}
-<form method=post>
-  <dl>
-    {{ render_field(form.select) }}
-    <p>
-    {{ render_field(form.search) }}
-  </dl>
-  <p><input type=submit value=search>
+<form method="GET">
+  <input type="search" placeholder="Search Ticker" name="q">
+  <button type="submit">Select</button>
 </form>
-   
-{% endblock content %}
