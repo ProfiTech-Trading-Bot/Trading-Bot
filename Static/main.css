@@ -96,4 +96,6 @@ a.article-title:hover {
      text-decoration: none;
      display: inline-block;
      font-size: 16px;
+     position: fixed;
+     top: 480px;
 }

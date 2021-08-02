@@ -93,3 +93,4 @@ portfolio = {}
 #graphProfit()
 
 #print(checkStock("AAPL"))
+

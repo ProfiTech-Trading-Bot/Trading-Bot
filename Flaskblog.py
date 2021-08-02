@@ -48,7 +48,8 @@ def home():
 
 @app.route("/about")
 def about():
-     return render_template('about.html', title = 'How it Works')
+     Formatting = os.path.join(app.config['UPLOAD_FOLDER'], 'Formatting.jpg')
+     return render_template('about.html', title = 'How it Works', formatimage = Formatting)
 
 @app.route("/meet")
 def meet():
@@ -66,7 +67,7 @@ def register():
 def login():
      form = LoginForm()
      if form.validate_on_submit():
-          if form.email.data == 'admin@blog.com' and form.password.data == 'password':
+          if form.email.data == 'admin@gmail.com' and form.password.data == 'password':
                flash('You have been logged in!', 'success')
                return redirect(url_for('home'))
           else:

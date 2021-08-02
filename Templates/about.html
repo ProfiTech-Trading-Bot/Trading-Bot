@@ -6,6 +6,7 @@ ProfiTech Hackathon-->
 {% block content %}
      <h1>How it Works</h1>
      <hr style = "height:1px;border-width:0;color:rgb(0, 0, 0);background-color:rgb(0, 0, 0)">
+     
      <p align = "justify">Welcome to the Front-end of our hackathon project! Our team (Fahim, Hugh, Richard and Kitty) hope that you enjoy exploring our program!</p>
      <p align = "justify">This project was coded during the Profitech Hackathon between July 31st, 2021 at 10:00 AM until August 2nd, 2021 at 10:00 AM.</p>
      <p>Before running the program, make sure that you have the following installed:</p>
@@ -24,6 +25,7 @@ ProfiTech Hackathon-->
                <li>pip install tweepy</li>
           </ul>
      <br>
+
      <h2>How it Began</h2>
      <p align = "justify">We came up with a team the day before the Hackathon started and read through the options when the hackathon began. Initially we planned on participating in the Beginner category however we discovered that it was incredibly vague so we ended up having to decided from the other categories: Fintech, Finance and Technology. Finance was the first to be ruled out unfortunately because we wanted to include coding within our project so we were left with Fintech and Technology. Afterwards, we voted and decided to pick a question in the Technology section. As we read each question, we voted in favour for the question if it was something we would like to explore in this hackathon. The resluts are as shown below: </p>
      <div style="margin-left: 80px">
@@ -44,8 +46,65 @@ ProfiTech Hackathon-->
           Question 8: 1.5/4 <br>
           <p align = "justify">Construct a tool to analyze and predict stocks.</p>
      </div>
+     <br>
+
      <h2>Initial Plans</h2>
      <p align = "justify">As an organized team, we began by planning what we would do and how we would split the project so that everyone could work on it efficently at the same time. Unfortunate to say, but there were still some technical issues, haha... </p>
+     <p align = "justify">Here is the first draft of our plan:</p>
+     <ol type = "1">
+          <li>Sentimental Analysis (Fahim & Hugh)</li> 
+          <ol type = "a">
+               <li>Twitter’s api for finding tweets</li>
+               <li>Indicators: Perhaps identify the most mentioned stocks
+               <li>Come up with ratio/number that shows sentiment from –1 to 1</li> 
+          </ol>
+          <li>Tracking a given stock’s price (Hugh & Richard & Kitty)</li> 
+          <ol type = "a">
+               <li>Identifying how much the stock has increased</li> 
+               <li>APIs to get data from some website/data source</li>
+               <ol type = "i">
+                    <li>Python Alphavantage or Yfinance for stocks </li>
+                    <li>Binance for crypto</li>
+               </ol>
+               <li>Analyze where the stock might go based on price and other indicators</li>
+          </ol>
+          <li>Using sentimental analysis to predict the stock price </li>
+          <ol type = "a">
+               <li>Biometrics, use ratios</li>
+               <li>Technical indicators like moving averages, etc </li>
+               <li>Machine learning</li>
+          </ol>
+          <li>Simple interface (Hugh, Kitty, Richard)</li>
+          <ol type = "a">
+               <li>If putting it on the web, probably use Javascript with React </li>
+          </ol>
+          <li>Make the trading bot trade (Everyone)</li>
+     </ol>
+     <p>Interface:</p>
+     <div style="margin-left: 40px">
+          <li>What stocks our analysis is recommending and when to buy or sell</li>  
+          <li>Simulated growth/decrease of our portfolio value </li>           
+          <li>Have some profit/loss stats</li>
+     </div>
+     <center><img style = "margin: 20px 0px 30px 0px;" src = "{{formatimage}}" alt = "Stock Market" width = "100%" height = "max"></center>
+     <br>
 
-     <p align = "justify"> </p>
+     
+     <h2>The Journey and All the Feels</h2>
+     <p>We struggled. Struggled very hard.</p>
+     <p align = "justify">There was so many problems we ran into, it's not even funny. Even though I followed tutorials, the code failed multiple times. There was so much stress and confusion. However, it was an awfuly sastifying feeling when the code finally ran! And it looked somewhat similar to the template we had created.</p>
+     <p align = "justify">The way we had intially divided up the project did not come to fruition. It was unproductive when three of us tried to code together on the same editor. And there were many times where we had to uninstall Python, Github, VSCode, and VSCode Live Share because they failed to work. (There was a lot of technical errors on our end.) On the other hand, it was really nice to have a template photo which was created so that we could base our web design off of it. (Having a direction was really nice. ~ Credits to Hugh Jiang because he asked.)  
+     
+     <p align = "justify">What was kind of funny was the fact that the email Profithackathon provided failed to work. ;-; They gave us the email profitechackthon@gmail.com. They spelt hackathon wrong! HMPH! Eventually though, we were able to get the aid of a very funny mentor. What's ironic was the fact that I figured out one of my own errors... However he was immensely helpful in general.</p>
+     <p align = "justify">I tried to convince our team to take a photo with arms crossed and sunglasses on, it's been a little troublesome. None of us really want to do it, but they have been saying that if I do it they would do it too. Would I really trust them though? </p>
+     <br>
+
+     <h2>The Ending</h2>
+     <p align = "justify">Our Trading Bot is focused around the sentimental analysis of the top stocks from the S&P 500 from Twitter. The stocks that gain positive attention on Twitter are then analyzed through our stock_analysis which compares the 9-days and 21-days moving average in order to determine whether the stock should be recommended to be purchased. The higher the 9-day moving averaged compared to the 21-day corresponds to a greater upward trend in price.</p>
+     <p align = "justify">The sign in and sign up buttons work in general, the only valid sign in is with the following username and password:</p>
+     <p style="margin-left: 40px">Username: admin@gmail.com</p>
+     <p style="margin-left: 40px">Password: password</p>
+     <p align = "justify">In addition, the sign in and sign up check for validity! Small red text appears if you enter something wrong.</p>
+     <br>
+<br><br><br>
 {% endblock content %}

@@ -67,8 +67,8 @@ ProfiTech Hackathon-->
                     {% endwith %}
                     {% block content %}{% endblock %}
                </div>
-               <div class="col-md-4">
-                    <div class="content-section">
+               <div class="col-md-4" >
+                    <div class="content-section" style="position:fixed; width:350px;">
                          <h3>Quick Access</h3>
                          <p class = 'text-muted'>You can find the newest and most up to date information here!
                               <ul class = "list-group">
@@ -88,8 +88,8 @@ ProfiTech Hackathon-->
                               </ul>
                          </p>
                     </div>
-                    <button class="stockSearch">Click here for stock info!</button>
-
+                    <button class="stockSearch" onclick="window.location.href='{{ url_for('livesignals') }}';" >Click here for stock info! </button>
+                    
                </div>
           </div>
         </main>
