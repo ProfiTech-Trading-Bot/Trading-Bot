@@ -21,9 +21,9 @@ tweetAnalyzer = TweetAnalyzer()
 
 posts = [
      {
-          'author': 'Kitty Cai, Richard Yang, Hugh Jiang, Fahim Ahmed',
+          'author': 'Kitty Cai',
           'title': 'How it Works',
-          'content': 'Welcome to the Front-end of our hackathon project!',
+          'content': 'Welcome to the Front-end of our hackathon project! With a small rant from Kitty. 😆',
           'date_posted': 'August 1, 2021'
      },
      {
@@ -49,11 +49,17 @@ def home():
 @app.route("/about")
 def about():
      Formatting = os.path.join(app.config['UPLOAD_FOLDER'], 'Formatting.jpg')
-     return render_template('about.html', title = 'How it Works', formatimage = Formatting)
+     LogoRun = os.path.join(app.config['UPLOAD_FOLDER'], 'ProfitersLogoRun.jpg')
+     LogoSuit = os.path.join(app.config['UPLOAD_FOLDER'], 'ProfitersLogoSuit.jpg')
+     return render_template('about.html', title = 'How it Works', formatimage = Formatting, logorun = LogoRun, logosuit = LogoSuit)
 
 @app.route("/meet")
 def meet():
-     return render_template('meet.html', title = 'Meet the Profiters')
+     Fahim = os.path.join(app.config['UPLOAD_FOLDER'], 'FahimProfiter.jpg')
+     Hugh = os.path.join(app.config['UPLOAD_FOLDER'], 'HughProfiter.jpg')
+     Richard = os.path.join(app.config['UPLOAD_FOLDER'], 'RichardProfiter.jpg')
+     Kitty = os.path.join(app.config['UPLOAD_FOLDER'], 'KittyProfiter.jpg')
+     return render_template('meet.html', title = 'Meet the Profiters', kittyprofiter = Kitty, hughprofiter = Hugh, richardprofiter = Richard, fahimprofiter = Fahim)
 
 @app.route("/register", methods = ['GET', 'POST'])
 def register():

@@ -27,10 +27,10 @@ class LoginForm(FlaskForm):
      submit = SubmitField('Login')
 
 class SearchTickerForm(FlaskForm):
-     ticker = StringField('Enter a Stock Ticker', validators=[DataRequired()])
+     ticker = StringField('Enter a Stock Ticker from S&P 500:', validators=[DataRequired()])
      submit = SubmitField('Enter')
 
 class HistoricalTestForm(FlaskForm):
-     ticker = StringField('Enter a Stock Ticker', validators=[DataRequired()])
+     ticker = StringField('Enter a Stock Ticker from S&P 500:', validators=[DataRequired()])
      start_date = DateField('Start Date of Tweets (YYYY-MM-DD)', format="%Y-%m-%d", default=datetime.datetime.now())
      submit = SubmitField('Enter')
