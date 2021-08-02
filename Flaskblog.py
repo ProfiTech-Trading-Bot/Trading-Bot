@@ -92,24 +92,27 @@ def livesignals():
           input = input.upper()
 
           if searchStocks(input) == False:
-               flash(f'{input} is not a valid ticker symbol in the S&P500. Please try again.')
+               flash(f'{input} is not a valid ticker symbol in the S&P500. Please try again.', 'error')
           else:
-               print(getTrend(input))
-               print(tweetAnalyzer.getStockSentiment(input))
+
+               currentTrend = 'uptrend' if getTrend(input) else 'downtrend'
+               sentiment = tweetAnalyzer.getStockSentiment(input)
+               
+               if sentiment > 0 and currentTrend == 'uptrend':
+                    status = 'BUY'
+               elif sentiment < 0 and not currentTrend:
+                    status = 'SELL'
+               else:
+                    status = 'ANALYSIS INCONCLUSIVE'
+
+               trade_data = {
+                    'ticker': input,
+                    'trend': currentTrend,
+                    'sentiment': sentiment,
+                    'status': status
+               }
 
      return render_template('livesignals.html', form=form, trade_data=trade_data)
 
-     results = []
-     search_string = search.data['search']
-
-     results = searchStocks(search_string)
-
-     if not results:
-          flash('No results found!')
-          return redirect('/')
-     else:
-          #Return results
-          return render_template('results.html', results = results)
-   
 if __name__ == '__main__':
      app.run(debug=True)

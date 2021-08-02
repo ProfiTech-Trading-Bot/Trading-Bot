@@ -14,4 +14,17 @@
            </div>  
         </form>
     </div>
+
+    {% if trade_data %}
+        <div class="content-section">
+            <h2 style="padding-top: 20px">Live Analysis for Ticker: {{ trade_data['ticker'] }}</h2>
+            <p>Trend Analysis: Currently on a {{ trade_data['trend'] }}.</p>
+            <p>Twitter Sentiment Polarity: {{ trade_data['sentiment'] }}.</p>
+            <p><b>Recommendation:</b> {{ trade_data['status'] }}.</p>
+            <p><p>
+                Twitter Sentiment Polarity ranges in value from -1.0 to 1.0. The greater the value, the greater the positive sentiment. 
+                The lower the value, the greater the negative sentiment. 
+            </p></p>
+        </div>
+    {% endif %}
 {% endblock content %}
