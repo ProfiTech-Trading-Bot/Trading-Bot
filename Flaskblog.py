@@ -7,7 +7,7 @@ from sentimental_analysis import TweetAnalyzer
 from flask import Flask, flash, redirect, render_template, request, url_for
 from forms import RegistrationForm, LoginForm, SearchTickerForm
 import os
-from trade import searchStocks
+from trade import searchStocks, getStockPrice
 
 app = Flask(__name__)
 
@@ -79,11 +79,6 @@ def livesignals():
 
      # Trade data that is passed to html template
      trade_data = {}
-
-     # Check if the search input ticker is a valid ticker
-     print(form.ticker)
-     print(type(form.ticker.data))
-     print(str(form.ticker.data))
      
      input = form.ticker.data
      
@@ -109,7 +104,8 @@ def livesignals():
                     'ticker': input,
                     'trend': currentTrend,
                     'sentiment': sentiment,
-                    'status': status
+                    'status': status,
+                    'price': getStockPrice(input)
                }
 
      return render_template('livesignals.html', form=form, trade_data=trade_data)

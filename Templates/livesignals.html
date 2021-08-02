@@ -18,6 +18,7 @@
     {% if trade_data %}
         <div class="content-section">
             <h2 style="padding-top: 20px">Live Analysis for Ticker: {{ trade_data['ticker'] }}</h2>
+            <p>Current Price: ${{ trade_data['price'] }}</p>
             <p>Trend Analysis: Currently on a {{ trade_data['trend'] }}.</p>
             <p>Twitter Sentiment Polarity: {{ trade_data['sentiment'] }}.</p>
             <p><b>Recommendation:</b> {{ trade_data['status'] }}.</p>
